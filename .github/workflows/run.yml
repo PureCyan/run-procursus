@@ -76,8 +76,8 @@ jobs:
         if: steps.information.outputs.procursus_bootstrapped != 'true' && (inputs.cache != 'true' || steps.procursus-cache.outputs.cache-hit != 'true')
         shell: bash
         run: |
-          sudo  apt-get install -y wget
-          wget https://apt.procurs.us/bootstraps/big_sur/bootstrap-darwin-amd64.tar.zst
+          sudo brew install aria2 -y
+          aria2c https://apt.procurs.us/bootstraps/big_sur/bootstrap-darwin-amd64.tar.zst
           tar --zstd -xf bootstrap-darwin-amd64.tar.zst
           tar -xvf bootstrap-darwin-amd64.tar
   
