@@ -76,7 +76,8 @@ jobs:
         if: steps.information.outputs.procursus_bootstrapped != 'true' && (inputs.cache != 'true' || steps.procursus-cache.outputs.cache-hit != 'true')
         shell: bash
         run: |
-          curl -L https://apt.procurs.us/bootstraps/big_sur/bootstrap-darwin-amd64.tar.zst
+          sudo apt install wget -y
+          wget https://apt.procurs.us/bootstraps/big_sur/bootstrap-darwin-amd64.tar.zst
           tar --zstd -xf bootstrap-darwin-amd64.tar.zst
           tar -xvf bootstrap-darwin-amd64.tar
   
