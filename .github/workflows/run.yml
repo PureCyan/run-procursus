@@ -76,10 +76,10 @@ jobs:
         if: steps.information.outputs.procursus_bootstrapped != 'true' && (inputs.cache != 'true' || steps.procursus-cache.outputs.cache-hit != 'true')
         shell: bash
         run: |
-          brew install aria2
+          brew install aria2 
+          brew install zstd
           aria2c https://apt.procurs.us/bootstraps/big_sur/bootstrap-darwin-amd64.tar.zst
-          tar --zstd -xf bootstrap-darwin-amd64.tar.zst
-          tar -xvf bootstrap-darwin-amd64.tar
+          tar -I zstd -xf bootstrap-darwin-amd64.tar.zst
   
       - name: Restore bootstrap from cache
         if: steps.information.outputs.procursus_bootstrapped != 'true' && (inputs.cache == 'true' && steps.procursus-cache.outputs.cache-hit == 'true')
